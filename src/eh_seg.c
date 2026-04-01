@@ -279,27 +279,30 @@ static enum eh_slot_state update_eh_matched_slot(
 	struct kv *old_kv;
 	enum eh_slot_state state;
 
-	while (1) {
-		state = compare_eh_slot(key, &old_kv, slot_val);
+	state = compare_eh_slot(key, &old_kv, slot_val);
 
-		if (state == EXISTED_SLOT) {
-			state = check_unique_eh_slot(kv, key, hashed_key, slot_addr, rec_pair);
+	if (state == EXISTED_SLOT) {
+		state = check_unique_eh_slot(kv, key, hashed_key, slot_addr, rec_pair);
 
-			if (likely(state == EXISTED_SLOT)) {
-				old_slot = cas(slot_addr, slot_val, new_slot);
+		while (likely(state == EXISTED_SLOT)) {
+			old_slot = cas(slot_addr, slot_val, new_slot);
 
-				if (likely(old_slot == slot_val)) {
-					dealloc_eh_kv(old_kv);
-					return SUCCESS_SLOT;
-				}
-
-				record_bucket_initial_traversal(rec_pair);
-				slot_val = old_slot;
-				continue;
+			if (likely(old_slot == slot_val)) {
+				dealloc_eh_kv(old_kv);
+				return SUCCESS_SLOT;
 			}
+				
+			if (unlikely(eh_slot_invalid(old_slot))) {
+				record_bucket_initial_traversal(rec_pair);
+				return INVALID_SLOT;
+			}
+				
+			if (unlikely(eh_slot_deleted(old_slot)))
+				return DELETED_SLOT;
+				
+			slot_val = old_slot;
+			old_kv = eh_slot_kv_addr(old_slot);
 		}
-
-		break;
 	}
 
 	return state;
