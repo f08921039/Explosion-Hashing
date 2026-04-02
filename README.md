@@ -20,7 +20,7 @@ Before you begin, ensure you have met the following requirements:
 
     OS: Linux kernel 6.14 (make sure your kernel provides MADV_POPULATE_WRITE and MADV_POPULATE_READ options for madvise syscall)
 
-    COMPILER: GCC
+    COMPILER: gcc 13.3.0
     
     Library: pthread
 
