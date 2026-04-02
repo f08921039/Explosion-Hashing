@@ -38,7 +38,7 @@ Here is an overview of the project's layout:
 🔨 Build & Compilation
 
 If your project requires compilation, use the commands below:
-make
+``` make ```
 
 The default version is for 64-bit key and 64-bit value. 
 If you want to compile the version supporting variable-length key and value, please remove -DDHT_INTEGER from makefile's CFLAGS.
@@ -50,7 +50,7 @@ Finally, the codes in test directory can be compiled and link explosion_hashing 
 🚀 Execution (Running the App)
 You can add your test code (e.g., test_app.c) in test directory, and add 'test_app' in makefile's TARGET.
 After compiling, run your test prograim:
-./test_app
+``` ./test_app ```
 
 
 🔌 API Documentation
