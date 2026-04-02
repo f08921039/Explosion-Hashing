@@ -53,7 +53,8 @@ After compiling, run your test prograim:
 ``` ./test_app ```
 
 
-🔌 API Documentation
+🔌 API Documentation  
+
 All APIs and required structures are declared in src/dht.h ("dht" means dynamic hash table):
 1. ....
 
