@@ -29,10 +29,10 @@ Before you begin, ensure you have met the following requirements:
 📂 Directory Structure
 
 Here is an overview of the project's layout:
-. 
-├── src/                # Source codes: .h and .c 
-├── test/               # test prograims 
-├── Makefile
+.   
+├── src/                # Source codes: .h and .c  
+├── test/               # test prograims  
+├── Makefile  
 ├── README.md
 
 🔨 Build & Compilation
