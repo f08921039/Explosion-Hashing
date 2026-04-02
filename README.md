@@ -37,14 +37,15 @@ Before you begin, ensure you have met the following requirements:
     
 🔨 Build & Compilation
 
-If your project requires compilation, use the commands below:  
-``` make ```
-
     Default: 64-bit key/value support.
     
     Variable-length key/value: Remove -DDHT_INTEGER from CFLAGS in the Makefile.
 
-    Build Process: compile src/*.c into obj/ -> bundle .o into lib/libexplosion_hashing.a -> links .a to test/*.c -> generate exe.   
+    Build Process: compile src/*.c into obj/ -> bundle .o into lib/libexplosion_hashing.a -> links .a to test/*.c -> generate exe.
+
+
+If your project requires compilation, use the commands below:  
+``` make ```   
 
 🚀 Execution (Running the App)  
 
