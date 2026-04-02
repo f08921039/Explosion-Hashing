@@ -47,8 +47,8 @@ All files in src will be compiled, obj directory will be created to contain .o f
 Then these objs compose libexplosion_hashing.a in lib directory.  
 Finally, the codes in test directory can be compiled and link explosion_hashing libray, generating executable prograims in the current path.    
 
-🚀 Execution (Running the App)
-You can add your test code (e.g., test_app.c) in test directory, and add 'test_app' in makefile's TARGET.
+🚀 Execution (Running the App)  
+You can add your test code (e.g., test_app.c) in test directory, and add 'test_app' in makefile's TARGET.  
 After compiling, run your test prograim:  
 ``` ./test_app ```
 
