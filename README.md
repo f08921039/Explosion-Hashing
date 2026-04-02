@@ -47,7 +47,8 @@ Variable-length: Remove -DDHT_INTEGER from CFLAGS in the Makefile.
 Build Process: Compiles src/*.c into obj/, bundles them into lib/libexplosion_hashing.a, and links the test/ source to generate executables in the current directory.     
 
 🚀 Execution (Running the App)  
-You can add your test code (e.g., test_app.c) in test directory, and add 'test_app' in makefile's TARGET.  
+
+To add a test, place your source (e.g., test_app.c) in the test/ directory and add the name to TARGET in the Makefile.  
 After compiling, run your test prograim:  
 ``` ./test_app ```
 
