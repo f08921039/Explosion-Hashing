@@ -49,8 +49,10 @@ If your project requires compilation, use the commands below:
 
 🚀 Execution (Running the App)  
 
-To add a test, place your source (e.g., test_app.c) in the test/ directory and add the name to TARGET in the Makefile.  
-After compiling, run your test prograim:  
+
+    Add a test: place your code (e.g., test_app.c) in the test/ , add the name to TARGET in the Makefile.
+  
+After compiling, run your test prograim (e.g., test_app):  
 ``` ./test_app ```
 
 
