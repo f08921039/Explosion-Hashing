@@ -37,7 +37,7 @@ Here is an overview of the project's layout:
 
 🔨 Build & Compilation
 
-If your project requires compilation, use the commands below:
+If your project requires compilation, use the commands below:  
 ``` make ```
 
 The default version is for 64-bit key and 64-bit value. 
@@ -49,7 +49,7 @@ Finally, the codes in test directory can be compiled and link explosion_hashing 
 
 🚀 Execution (Running the App)
 You can add your test code (e.g., test_app.c) in test directory, and add 'test_app' in makefile's TARGET.
-After compiling, run your test prograim:
+After compiling, run your test prograim:  
 ``` ./test_app ```
 
 
