@@ -27,24 +27,24 @@ Before you begin, ensure you have met the following requirements:
     PACKAGE: libnuma-dev or other numa tools
 
 📂 Directory Structure
-
-Here is an overview of the project's layout:  
+ 
 .   
 ├── src/                # Source codes: .h and .c  
 ├── test/               # test prograims  
 ├── Makefile  
 ├── README.md
+
     
 🔨 Build & Compilation
 
 If your project requires compilation, use the commands below:  
 ``` make ```
 
-Default: 64-bit key/value support.  
+    Default: 64-bit key/value support.
+    
+    Variable-length key/value: Remove -DDHT_INTEGER from CFLAGS in the Makefile.
 
-Variable-length: Remove -DDHT_INTEGER from CFLAGS in the Makefile.  
-
-Build Process: Compiles src/*.c into obj/, bundles them into lib/libexplosion_hashing.a, and links the test/ source to generate executables in the current directory.     
+    Build Process: Compiles src/*.c into obj/, bundles them into lib/libexplosion_hashing.a, and links the test/ source to generate executables in the current directory.   
 
 🚀 Execution (Running the App)  
 
