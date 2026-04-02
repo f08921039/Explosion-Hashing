@@ -44,7 +44,7 @@ If your project requires compilation, use the commands below:
     
     Variable-length key/value: Remove -DDHT_INTEGER from CFLAGS in the Makefile.
 
-    Build Process: Compiles src/*.c into obj/, bundles them into lib/libexplosion_hashing.a, and links the test/ source to generate executables in the current directory.   
+    Build Process: compile src/*.c into obj/ -> bundle .o into lib/libexplosion_hashing.a -> links .a to test/*.c -> generate exe.   
 
 🚀 Execution (Running the App)  
 
