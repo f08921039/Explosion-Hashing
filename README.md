@@ -59,7 +59,7 @@ After compiling, run your test prograim (e.g., test_app):
 🔌 API Documentation  
 
 All APIs and required structures are declared in src/dht.h ("dht" means dynamic hash table):
-1. ....
+1. struct dht_work_function
 
     ...
 
