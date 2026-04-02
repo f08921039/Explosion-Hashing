@@ -40,12 +40,11 @@ Here is an overview of the project's layout:
 If your project requires compilation, use the commands below:  
 ``` make ```
 
-The default version is for 64-bit key and 64-bit value.  
-If you want to compile the version supporting variable-length key and value, please remove -DDHT_INTEGER from makefile's CFLAGS.
+Default: 64-bit key/value support.  
 
-All files in src will be compiled, obj directory will be created to contain .o file.  
-Then these objs compose libexplosion_hashing.a in lib directory.  
-Finally, the codes in test directory can be compiled and link explosion_hashing libray, generating executable prograims in the current path.    
+Variable-length: Remove -DDHT_INTEGER from CFLAGS in the Makefile.  
+
+Build Process: Compiles src/*.c into obj/, bundles them into lib/libexplosion_hashing.a, and links the test/ source to generate executables in the current directory.     
 
 🚀 Execution (Running the App)  
 You can add your test code (e.g., test_app.c) in test directory, and add 'test_app' in makefile's TARGET.  
