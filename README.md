@@ -75,6 +75,10 @@ All APIs and required structures are declared in src/dht.h ("dht" means dynamic 
 
     struct dht_work_function **node_func: a start pointer of dht_work_function array, whose element's callback functions will be pinned to the corresponding node.
 ```   
-3. ...
+3. **int dht_init_structure(struct dht_node_context *node_context)**: Call this function to init per-node and per-thread data structures before using other APIs. If success, return 0; otherwise, return -1;
+```
+struct dht_node_context *node_context : nodes and max_node_thread feild should be assigned before passing this function.
+```
+4. 
 
     ...
