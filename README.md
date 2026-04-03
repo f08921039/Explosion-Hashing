@@ -59,13 +59,13 @@ After compiling, run your test prograim (e.g., test_app):
 🔌 API Documentation  
 
 All APIs and required structures are declared in src/dht.h ("dht" means dynamic hash table):
-1. struct dht_work_function: a discriptor of an array of callback functions and their parameters.
+1. **struct dht_work_function**: a discriptor of an array of callback functions and their parameters.
 ```
     void *(*start_routine)(void *): a start pointer of your callback function array.  
 
     void *arg: a start pointer of the parameter array corresponding to callback functions.
 ``` 
-2. struct dht_node_context: a discriptor for thread allocation across NUMA nodes.
+2. **struct dht_node_context**: a discriptor for thread allocation across NUMA nodes.
 ```
     int nodes: the number of NUMA nodes in your system.  
 
