@@ -2,7 +2,7 @@
 
 ExpHash
 
-A hased-based in-memory key-value store library delivers superior QoS—characterized by high throughput, low latency, and robust stability.
+An in-memory key-value store library based on a dynamic hash table delivers superior QoS—characterized by high throughput, low latency, and robust stability.
 
 📌 Features
 
@@ -58,7 +58,7 @@ After compiling, run your test prograim (e.g., test_app):
 
 🔌 API Documentation  
 
-All APIs and required structures are declared in src/dht.h ("dht" means dynamic hash table):
+All APIs and required structures are declared in src/dht.h (7~10 is for 64-bit key/value version; 11~14 is for variable-length key/value version):
 1. **struct dht_work_function**: a discriptor of an array of callback functions and their parameters.
 ```
     void *(*start_routine)(void *): a start pointer of your callback function array.  
@@ -101,4 +101,39 @@ u64 value: the value of the insert KV item.
 ```
 u64 key: the target key for update operation.
 u64 value: the value of the update KV item.
+```
+9. **int dht_kv_delete(u64 key)**: call this function in threads created by ExpHash APIs to delete the existing KV item. If success, return 0; if target key not found, return 1; if error, return -1.
+```
+u64 key: the target key for delete operation.
+```
+10. **int dht_kv_lookup(u64 key, u64 *val_buf)**: call this function in threads created by ExpHash APIs to get the value of an existing KV item. If success, return 0; if target key not found, return 1.
+```
+u64 key: the target key for lookup operation.
+u64 val_buf: the buffer address to store the value of the KV item.
+```
+11. **int dht_kv_insert(void *key, void *value, int key_len, int val_len)**: call this function in threads created by ExpHash APIs to insert a new KV item. If success, return 0; if target key exists, return 1; if error, return -1.
+```
+void *key: the address of the target key for insert operation.
+void *value: the address of the insert KV item's value.
+int key_len: the length of the key.
+int val_len: the length of the value.
+```
+12. **int dht_kv_update(void *key, void *value, int key_len, int val_len)**: call this function in threads created by ExpHash APIs to update the value of an existing KV item. If success, return 0; if target key not found, return 1; if error, return -1.
+```
+void *key: the address of the target key for update operation.
+void *value: the address of the update KV item's value.
+int key_len: the length of the key.
+int val_len: the length of the value.
+```
+13. **int dht_kv_delete(void *key, int key_len)**: call this function in threads created by ExpHash APIs to delete the existing KV item. If success, return 0; if target key not found, return 1; if error, return -1.
+```
+void *key: the address of the target key for delete operation.
+int key_len: the length of the key.
+```
+14. **int dht_kv_lookup(void *key, void *val_buf, int key_len, int buf_len)**: call this function in threads created by ExpHash APIs to get the value of an existing KV item. If success, return the length of the lookup value; if target key not found, return 0; if target key found but value buffer insufficient, retuen the length of lost value.
+```
+void *key: the address of the target key for lookup operation.
+void *val_buf: the address of the buffer address to store the value of the KV item.
+int key_len: the length of the key.
+int buf_len: the length of the value buffer.
 ```
