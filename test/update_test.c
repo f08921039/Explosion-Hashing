@@ -8,7 +8,7 @@
 
 
 void *func(void *para) {
-	u64 i, ent = 35000000;
+	u64 i, ent = 30000000;
 	u64 val;
 	u64 t1, t2;
 	int ind = (int)para;
@@ -36,7 +36,7 @@ void *func(void *para) {
 
 	t2 = sys_time_us();
 
-	printf("thread %d inserts %lu kvs: %lu us\n", ind, ent, t2 - t1);
+	printf("thread %d inserts %lu + updates %lu kvs: %lu us\n", ind, ent, ent / 2, t2 - t1);
 
 	for (i = ent * ind; i < ent * (ind + 1); ++i) {
 		if (dht_kv_lookup(i, &val)) {

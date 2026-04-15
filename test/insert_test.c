@@ -7,34 +7,35 @@
 #define MAX_WT_NUM_PER_NUMA	36
 
 
-#define INSERT_NUM  29257143UL
-
-#define TAIL10_NUM 10
-
-static unsigned int time_record[WT_NUM_PER_NUMA*NUMA_NUM][1000000];
-
 void *func(void *para) {
-	u64 i, ent = INSERT_NUM;
+	u64 i, ent = 51200000;
 	u64 val;
 	u64 t1, t2;
 	int ind = (int)para;
+	
+	t1 = sys_time_us();
 
 	for (i = ent * ind; i < ent * (ind + 1); ++i) {
-	        t1 = sys_time_us();
-	        
 		if (dht_kv_insert(i, i)) {
 			printf("dht_kv_insert %lu failed\n", i);
 			return NULL;
 		}
-		
-		t2 = sys_time_us();
-		
-		if (t2 - t1 >= 1000000)
-		    time_record[ind][1000000 - 1] += 1;
-		else
-		    time_record[ind][t2 - t1] += 1;
 	}
 
+	t2 = sys_time_us();
+
+	printf("thread %d inserts %lu kvs: %lu us\n", ind, ent, t2 - t1);
+
+	for (i = ent * ind; i < ent * (ind + 1); ++i) {
+		if (dht_kv_lookup(i, &val) || val != i) {
+			printf("dht_kv_lookup %lu error\n", i);
+			return NULL;
+		}
+	}
+
+	t1 = sys_time_us();
+
+	printf("thread %d lookups %lu kvs: %lu us\n", ind, ent, t1 - t2);
 
 	while (1) {sleep_us(1000000000);}
 }
@@ -47,11 +48,7 @@ int main() {
 	struct dht_work_function *work_func[NUMA_NUM];
 	struct dht_work_function work_func_arr[NUMA_NUM][MAX_WT_NUM_PER_NUMA];
 
-	int n, i, j, ret;
-	unsigned long sum, count;
-	unsigned int tail[TAIL10_NUM];
-	
-	memset(&time_record[0][0], 0, (WT_NUM_PER_NUMA*NUMA_NUM*1000000) / sizeof(unsigned int));
+	int n, i, ret;
 
 	for (n = 0; n < NUMA_NUM; ++n) {
 		max_node_thread[n] = MAX_WT_NUM_PER_NUMA;
@@ -83,40 +80,7 @@ int main() {
 		printf("dht_create_thread failed\n");
 		return -1;
 	}
-	
-	sleep_us(60000000);
-	
-	for (i = 1; i < WT_NUM_PER_NUMA*NUMA_NUM; ++i) {
-	    for (j = 0; j < 1000000; ++j)
-	        time_record[0][j] += time_record[i][j];
-	}
-	
-	
-	sum = 0;
-	count = WT_NUM_PER_NUMA*NUMA_NUM*INSERT_NUM;
-	
-	i = TAIL10_NUM;
-	
-	while (i) {
-	    /*count -= 92160000;*/count /= 10;
-	    if (count == 0)
-	        count = 1;
 
-	    tail[--i] = count;
-	}
-	
-	for (j = 0; j < 1000000; ++j) {
-	    sum += time_record[0][1000000 - 1 - j];
-	
-	    while (sum >= tail[i]) {
-	        printf("last %u inserts: %d us\n", tail[i], 1000000 - 1 - j);
-	        if (++i == TAIL10_NUM) {
-	            j = 1000000;
-	            break;
-	        }
-	    }
-	}
-
-	while (1) {}
+	while (1) {sleep_us(1000000000);}
 	return 0;
 }

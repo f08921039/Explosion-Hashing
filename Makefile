@@ -9,7 +9,7 @@ OBJDIR := obj
 DEPSDIR := deps
 
 # 執行檔名稱
-TARGET := test_app tail_latency update_test delete_test stable_test
+TARGET := insert_test tail_latency update_test stable_test zipfian
 
 # 靜態函式庫名稱
 LIBNAME := libexplosion_hashing.a
@@ -20,7 +20,7 @@ CC := gcc
 # -MP: 為每個標頭檔建立一個虛擬目標 (phony target)，當刪除標頭檔時可避免編譯錯誤
 CFLAGS := -Wall -Wextra -O3 -g -I$(SRCDIR) -MMD -MP -pthread -DDHT_INTEGER
 LDFLAGS := -L$(LIBDIR) -lexplosion_hashing
-LIBS = -lnuma
+LIBS = -lnuma -lm
 
 # 尋找所有 .c 原始檔
 SRC_FILES := $(wildcard $(SRCDIR)/*.c)
