@@ -37,7 +37,7 @@ int eh_insert_kv(
 #ifdef DHT_INTEGER
     kv = alloc_eh_kv(false);
 #else
-    kv = alloc_eh_kv(key->len, val->len, false);
+    kv = alloc_eh_kv(key.len, val.len, false);
 #endif
 
     if (unlikely(kv == INVALID_ADDR))
@@ -86,7 +86,7 @@ int eh_update_kv(
 #ifdef DHT_INTEGER
     kv = alloc_eh_kv(true);
 #else
-    kv = alloc_eh_kv(key->len, val->len, true);
+    kv = alloc_eh_kv(key.len, val.len, true);
 #endif
 
     if (unlikely(kv == INVALID_ADDR))
